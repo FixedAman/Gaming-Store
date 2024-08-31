@@ -1,0 +1,5 @@
+/* ImageSlider.css */
+.carousel-control-prev, 
+.carousel-control-next {
+  display: none;
+}
