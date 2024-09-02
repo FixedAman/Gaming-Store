@@ -45,7 +45,7 @@ const Register = () => {
           />
         </div>
         {/* Registration Form */}
-        <div className="flex-1 p-8 bg-white bg-opacity-30 rounded backdrop-blur-md">
+        <div className="flex-1 p-8 bg-white bg-opacity-30  backdrop-blur-md">
           <h1 className="text-3xl font-bold text-gray-800 mb-6">
             Registration Form
           </h1>
