@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../store/auth";
 
 const Register = () => {
+  const navigate = useNavigate();
   const [user, setUser] = useState({
     username: "",
     email: "",
@@ -8,6 +11,8 @@ const Register = () => {
     password: "",
   });
 
+  // context api
+  const {storeTokenInLS} = useAuth();
   const handleChange = (e) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -17,9 +22,31 @@ const Register = () => {
     });
   };
 
-  const handleForm = (e) => {
+  const handleForm = async (e) => {
     e.preventDefault();
     // Add form submission logic here
+    try {
+      const response = await fetch(`http://localhost:5000/api/auth/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
+      if (response.ok) {
+        alert("Register Successful");
+        const object = await response.json();
+        storeTokenInLS(object.token);
+        console.log("from server", object);
+
+        setUser({ username: "", email: "", phone: "", password: "" });
+        navigate("/login");
+      } else {
+        alert("Invalid  Credential");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

@@ -1,10 +1,15 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../store/auth";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
+
+  const { storeTokenInLS } = useAuth();
   const handleChange = (e) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -13,10 +18,36 @@ const Login = () => {
       [name]: value,
     });
   };
-  const handleForm = (e) => {
+
+  const handleForm = async (e) => {
     e.preventDefault();
-    console.log(user);
+    console.log("Submitting:", user);
+    try {
+      const response = await fetch(`http://localhost:5000/api/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
+
+      if (response.ok) {
+        const object = await response.json();
+        alert("Log in Successful");
+        storeTokenInLS(object.token);
+        setUser({ email: "", password: "" });
+        navigate("/");
+      } else {
+        const errorData = await response.json();
+        console.error("Login failed:", errorData.message || "Unknown error");
+        alert("Log in failed: " + (errorData.message || "Unknown error"));
+      }
+    } catch (error) {
+      console.error("Network error:", error);
+      alert("Network error: " + error.message);
+    }
   };
+
   return (
     <>
       <section className="relative min-h-screen flex items-center justify-center">
@@ -31,27 +62,24 @@ const Login = () => {
           Your browser does not support the video tag.
         </video>
 
-        <main className="relative z-10 shadow-lg rounded-lg flex flex-col md:flex-row max-w-4xl w-full bg-opacity-0 overflow-hidden backdrop-blur-md">
+        <main className="relative z-10 shadow-2xl rounded-lg flex flex-col md:flex-row max-w-5xl w-full bg-opacity-0 overflow-hidden backdrop-blur-md mx-4 md:mx-6 lg:mx-8">
           {/* Image Section */}
           <div className="hidden md:block md:w-1/2">
             <img
               src="https://images7.alphacoders.com/928/thumb-1920-928728.jpg"
               alt="Registration Image"
-              className="object-cover h-full w-full "
+              className="object-cover h-full w-full"
             />
           </div>
 
           {/* Registration Form */}
-          <div className="flex-1 p-8 bg-white bg-opacity-50  backdrop-blur-md md:w-3/5 lg:w-2/5 mx-auto">
-            <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+          <div className="flex-1 p-10 bg-zinc-700 bg-opacity-60 backdrop-blur-md md:w-3/5 lg:w-2/5 mx-auto">
+            <h1 className="text-4xl font-bold text-gray-800 mb-8 text-center">
               Log in
             </h1>
-            <form onSubmit={handleForm} className="space-y-4">
+            <form onSubmit={handleForm} className="space-y-6">
               <div>
-                <label
-                  htmlFor="email"
-                  className="block text-gray-700 font-medium"
-                >
+                <label htmlFor="email" className="block text-white font-medium">
                   Email
                 </label>
                 <input
@@ -63,14 +91,14 @@ const Login = () => {
                   autoComplete="off"
                   value={user.email}
                   onChange={handleChange}
-                  className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="mt-2 w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="password"
-                  className="block text-gray-700 font-medium"
+                  className="block text-white font-medium"
                 >
                   Password
                 </label>
@@ -83,12 +111,12 @@ const Login = () => {
                   autoComplete="off"
                   value={user.password}
                   onChange={handleChange}
-                  className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="mt-2 w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
               </div>
               <button
                 type="submit"
-                className="w-full py-2 px-4 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-200"
+                className="w-full py-3 px-4 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-200"
               >
                 Login
               </button>
