@@ -4,6 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './Discover.css';
 
 const Discover = () => {
+  
+
   return (
     <>
       {/* First Section */}
@@ -105,6 +107,7 @@ const Discover = () => {
       </div>
     </>
   );
+
 };
 
 export default Discover;

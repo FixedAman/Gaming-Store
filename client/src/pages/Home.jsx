@@ -1,6 +1,21 @@
+import { useEffect, useState } from "react";
 import ImageSlider from "../components/ImageSlider";
+import { useAuth } from "../store/auth";
 
 const Home = () => {
+  const [consumer, setConsumer] = useState({
+    username: "",
+  });
+  const { person, isLoggedin } = useAuth();
+
+  useEffect(() => {
+    if (person && person.username) {
+      setConsumer({
+        username: person.username,
+      });
+    }
+  }, [person]);
+
   return (
     <>
       <main className="bg-zinc-800 min-h-screen flex justify-center flex-col">
@@ -9,16 +24,18 @@ const Home = () => {
             {/* Content Section */}
             <div className="hero-content p-8 lg:w-1/2 h-full text-center lg:text-left text-white flex flex-col justify-between gap-64">
               <div className="h-full">
-                <h1 className="text-3xl lg:text-5xl font-extrabold text-white mb-4 fade-in">
-                  Welcome To{" "}
-                  <span className="text-red-600 blink">Gaming Store</span>
+                <h1 className="text-3xl lg:text-5xl font-extrabold text-white mb-4 fade-in g  ">
+                  Welcome To
+                   <span className="text-red-600 blink">  Gaming Store</span>
                 </h1>
-                <p className="text-white mb-6 font-bold leading-relaxed text-center text-xl lg:text-2xl whitespace-normal mt-24 fade-in-up">
-                  Welcome to our,
+                <p className="text-white mb-6 font-bold leading-relaxed text-center text-xl lg:text-2xl whitespace-normal mt-24 fade-in-up g">
+                  {isLoggedin ? <>'Hi {consumer.username}'</> : <>"Hi User"</>}
+                  <br />
                   <span className="text-red-600">
                     your premier destination for gaming
                   </span>
-                  excellence! Whether you're hunting for the latest blockbuster
+
+                        excellence! Whether you're hunting for the latest blockbuster
                   or searching for hidden gems, we've got you covered.
                 </p>
               </div>

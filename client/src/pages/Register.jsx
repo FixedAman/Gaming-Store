@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../store/auth";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ const Register = () => {
   });
 
   // context api
-  const {storeTokenInLS} = useAuth();
+  const { storeTokenInLS } = useAuth();
   const handleChange = (e) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -33,22 +34,29 @@ const Register = () => {
         },
         body: JSON.stringify(user),
       });
+      const object = await response.json();
+      console.log(object);
+      toast.error(object.message);
       if (response.ok) {
-        alert("Register Successful");
-        const object = await response.json();
-        storeTokenInLS(object.token);
+        toast.success("Register Successful");
+        // store the token chilo 
         console.log("from server", object);
 
         setUser({ username: "", email: "", phone: "", password: "" });
         navigate("/login");
       } else {
-        alert("Invalid  Credential");
+        if (object.errors) {
+          const errorMessages = object.errors
+            .map((error) => error.message || "Unknown error")
+            .join("\n");
+          toast.error(errorMessages);
+        }
       }
     } catch (error) {
-      console.log(error);
+      console.error("Network error:", error);
+      alert("Network error: " + error.message);
     }
   };
-
   return (
     <section className="relative min-h-screen flex items-center justify-center">
       {/* Background Video */}
