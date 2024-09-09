@@ -27,9 +27,29 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(contact);
+    try {
+      const response = await fetch(`http://localhost:5000/api/form/contact`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(contact),
+      });
+      if (response.ok) {
+        alert("Contact Form Submitted Successfully");
+        setContact({
+          username: "",
+          email: "",
+          message: "",
+        });
+      } else {
+        console.log("error in data");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

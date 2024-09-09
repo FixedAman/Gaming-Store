@@ -21,8 +21,8 @@ const CustomNavbar = () => {
             <Nav.Link as={NavLink} to="/" className="me-3">
               Home
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/discover" className="me-3">
-              Discover
+            <Nav.Link as={NavLink} to="/store" className="me-3">
+              Store
             </Nav.Link>
             <Nav.Link as={NavLink} to="/contact" className="me-3">
               Contact Us

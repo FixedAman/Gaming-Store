@@ -16,7 +16,7 @@ const register = async (req, res) => {
     // if user exist
     const userExist = await User.findOne({ email: email });
     if (userExist) {
-      return res.status(400).json({ msg: "user already exist " });
+      return res.status(400).json({ message: "user already exist " });
     }
     // securing the password
     const saltRounds = 10;
@@ -34,35 +34,36 @@ const register = async (req, res) => {
       userId: newUser._id.toString(),
     });
   } catch (error) {
-    res.status(400).json({ msg: "Register hochena mona " });
     next(error);
   }
 };
 //  log in logic
 
-const login = async (req, res) => {
+const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     const existData = await User.findOne({ email });
     if (!existData) {
-      return res.status(400).json({ msg: "invalid credential" });
+      return res.status(400).json({ message: "Invalid credentials" });
     }
 
     const compare = await existData.comparePassword(password);
     if (compare) {
       res.status(200).json({
-        msg: "Log in  successfull ",
+        msg: "Log in successful",
         token: await existData.generateToken(),
         userId: existData._id.toString(),
       });
     } else {
-      res.status(400).json({ msg: "invalid email or password" });
+      return res.status(400).json({ message: "Invalid email or password" });
     }
   } catch (error) {
+    console.error("Error during login:", error);
     res.status(500).json({
-      msg: "the server has encountered an unexpected condition or configuration problem ",
+      message:
+        "The server has encountered an unexpected condition or configuration problem",
     });
-    next(error);
+    next(error); // Ensure error is passed to the next middleware (if any)
   }
 };
 

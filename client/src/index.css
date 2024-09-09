@@ -53,3 +53,8 @@
   animation: blink 1s infinite;
 }
 
+.toastBody {
+  font-family: "Atlas Grotesk Web", Arial, Helvetica, sans-serif;
+  color: #ffffff; /* #10171D */
+  font-size: 0.875rem !important;
+}
