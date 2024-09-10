@@ -3,6 +3,7 @@ import { useAuth } from "../store/auth";
 import { FaIdBadge, FaUser, FaEnvelope } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FaUserEdit } from "react-icons/fa";
+import { Link } from "react-router-dom";
 const AdminUsers = () => {
   const { authorizationData } = useAuth();
   const [users, setUsers] = useState([]);
@@ -29,6 +30,27 @@ const AdminUsers = () => {
       console.log(error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const geDeleteUser = async (id) => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/admin/users/delete/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: authorizationData,
+          },
+        }
+      );
+      const deleteData = await response.json();
+      console.log(`data${deleteData}`);
+      if (response.ok) {
+        getData();
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -69,16 +91,15 @@ const AdminUsers = () => {
               <th className="py-3 px-5 border-b text-left text-gray-700">
                 <div className="flex items-center gap-2">
                   <FaUserEdit className="text-blue-500" />
-                 Update
+                  Update
                 </div>
               </th>
               <th className="py-3 px-5 border-b text-left text-gray-700">
                 <div className="flex items-center gap-2">
                   <AiOutlineDelete className="text-red-500 text-xl" />
-                Delete
+                  Delete
                 </div>
               </th>
-              
             </tr>
           </thead>
           <tbody>
@@ -94,10 +115,10 @@ const AdminUsers = () => {
                   {user.email}
                 </td>
                 <td className="py-3 px-5 border-b text-gray-600">
-                  update
+                  <Link to={`/admin/users/${user._id}/edit`}>update</Link>
                 </td>
                 <td className="py-3 px-5 border-b text-gray-600">
-                  delete
+                  <button onClick={() => geDeleteUser(user._id)}>delete</button>
                 </td>
               </tr>
             ))}

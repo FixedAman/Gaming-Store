@@ -15,7 +15,7 @@ import Plans from "./pages/Plans";
 import AdminUsers from "./pages/Admin-Users";
 import AdminLayout from "./components/layout/Admin-layout";
 import AdminContacts from "./pages/Admin-Contacts";
-
+import AdminUpdate from "./pages/Admin-Update";
 
 const App = () => {
   return (
@@ -35,10 +35,10 @@ const App = () => {
           <Route path="/logout" element={<Logout />} />
           <Route path="/games/:id/payment" element={<PaymentPage />} />
           <Route path="/plans" element={<Plans />} />
-          <Route path="/admin" element={<AdminLayout/>}>
-           <Route path="users" element={<AdminUsers/>}/>
-           <Route path="contacts" element={<AdminContacts/>}/>
-
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route path="users" element={<AdminUsers />} />
+            <Route path="users/:id/edit" element={<AdminUpdate />} />
+            <Route path="contacts" element={<AdminContacts />} />
           </Route>
         </Routes>
       </BrowserRouter>
