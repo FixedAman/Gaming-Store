@@ -19,7 +19,9 @@ const AdminUpdate = () => {
       [name]: value,
     });
   };
+
   const params = useParams();
+
   const getOneData = async () => {
     try {
       const response = await fetch(
@@ -41,6 +43,7 @@ const AdminUpdate = () => {
   useEffect(() => {
     getOneData();
   }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -56,9 +59,9 @@ const AdminUpdate = () => {
         }
       );
       if (response.ok) {
-        toast.success("Update SuccessFully");
+        toast.success("Update Successful");
       } else {
-        toast.error("not updated succesfully");
+        toast.error("Not updated successfully");
       }
     } catch (error) {
       console.log(error);
@@ -66,16 +69,16 @@ const AdminUpdate = () => {
   };
 
   return (
-    <div className="flex flex-col items-center min-h-screen bg-gray-100 p-6">
-      <div className="w-full max-w-lg bg-white p-8 rounded-lg shadow-md">
-        <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">
-          Update the User Data
+    <div className="flex flex-col items-center min-h-screen bg-zinc-800 p-6">
+      <div className="w-full max-w-lg md:max-w-xl lg:max-w-2xl bg-white p-10 rounded-2xl shadow-2xl">
+        <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">
+          Update User Data
         </h1>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="flex flex-col">
             <label
               htmlFor="username"
-              className="mb-2 text-sm font-medium text-gray-700"
+              className="mb-2 text-sm font-semibold text-gray-700"
             >
               Username
             </label>
@@ -84,14 +87,14 @@ const AdminUpdate = () => {
               name="username"
               value={data.username}
               onChange={handleChange}
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
               placeholder="Enter username"
             />
           </div>
           <div className="flex flex-col">
             <label
               htmlFor="email"
-              className="mb-2 text-sm font-medium text-gray-700"
+              className="mb-2 text-sm font-semibold text-gray-700"
             >
               Email
             </label>
@@ -100,14 +103,14 @@ const AdminUpdate = () => {
               name="email"
               value={data.email}
               onChange={handleChange}
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
               placeholder="Enter email"
             />
           </div>
           <div className="flex flex-col">
             <label
               htmlFor="phone"
-              className="mb-2 text-sm font-medium text-gray-700"
+              className="mb-2 text-sm font-semibold text-gray-700"
             >
               Phone
             </label>
@@ -116,13 +119,13 @@ const AdminUpdate = () => {
               name="phone"
               value={data.phone}
               onChange={handleChange}
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
               placeholder="Enter phone number"
             />
           </div>
           <button
             type="submit"
-            className="w-full py-3 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            className="w-full py-3 mt-6 text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200"
           >
             Update
           </button>

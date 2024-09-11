@@ -86,7 +86,7 @@ const GameDetails = () => {
   return (
     <div className="bg-zinc-800 min-h-screen p-8 text-white">
       <div className="container mx-auto">
-        <h1 className="text-4xl font-bold mb-6 text-red-500">{game.name}</h1>
+        <h1 className="text-4xl font-bold mb-6 text-blue-500">{game.name}</h1>
         <img
           src={game.background_image}
           alt={game.name}
