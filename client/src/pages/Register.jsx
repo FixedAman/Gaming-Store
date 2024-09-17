@@ -25,7 +25,7 @@ const Register = () => {
 
   const handleForm = async (e) => {
     e.preventDefault();
-    // Add form submission logic here
+    
     try {
       const response = await fetch(`http://localhost:5000/api/auth/register`, {
         method: "POST",
@@ -66,7 +66,7 @@ const Register = () => {
         muted
         className="absolute top-0 left-0 w-full h-full object-cover -z-10 blur-sm bg-opacity-10"
       >
-        <source src="/videos/nfs.mp4" type="video/mp4" />
+        <source src="/videos/gta-6.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 

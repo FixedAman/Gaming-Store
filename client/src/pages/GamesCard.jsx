@@ -1,10 +1,12 @@
 import { useNavigate } from "react-router-dom";
 
+
 const GamesCard = ({ currGame }) => {
   const navigate = useNavigate();
   const handleClick = () => {
     navigate(`/store/game/${currGame.id}`);
   };
+ 
 
   return (
     <li
@@ -24,7 +26,7 @@ const GamesCard = ({ currGame }) => {
         <p className="text-blue-400 text-md mb-1">
           Released: {currGame.released}
         </p>
-        <p className="text-red-400 text-md mb-1">
+        <p className="text-white text-md mb-1">
           Genre:{" "}
           {currGame.genres.length > 0
             ? currGame.genres.map((curr) => curr.name).join(" / ")

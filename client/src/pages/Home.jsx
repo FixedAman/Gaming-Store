@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import ImageSlider from "../components/ImageSlider";
 import { useAuth } from "../store/auth";
+import { Footer } from "../components/Footer";
+import RandomGameCards from "./RandomCard";
 
 const Home = () => {
   const [consumer, setConsumer] = useState({
@@ -22,11 +24,11 @@ const Home = () => {
         <section className="section-hero w-full h-3/4 flex items-center justify-center">
           <div className="hero-two-section w-full h-full flex flex-col lg:flex-row items-center rounded-lg overflow-hidden">
             {/* Content Section */}
-            <div className="hero-content p-8 lg:w-1/2 h-full text-center lg:text-left text-white flex flex-col justify-between gap-64">
+            <div className="hero-content p-8 lg:w-1/2 h-full text-center lg:text-left text-white flex flex-col justify-between gap-64 ">
               <div className="h-full">
                 <h1 className="text-3xl lg:text-5xl font-extrabold text-white mb-4 fade-in g  ">
                   Welcome To
-                   <span className="text-red-600 blink">  Gaming Store</span>
+                  <span className="text-red-600 blink"> Gaming Store</span>
                 </h1>
                 <p className="text-white mb-6 font-bold leading-relaxed text-center text-xl lg:text-2xl whitespace-normal mt-24 fade-in-up g">
                   {isLoggedin ? <>'Hi {consumer.username}'</> : <>"Hi User"</>}
@@ -34,8 +36,7 @@ const Home = () => {
                   <span className="text-red-600">
                     your premier destination for gaming
                   </span>
-
-                        excellence! Whether you're hunting for the latest blockbuster
+                  excellence! Whether you're hunting for the latest blockbuster
                   or searching for hidden gems, we've got you covered.
                 </p>
               </div>
@@ -56,14 +57,14 @@ const Home = () => {
             {/* Image Section */}
             <div className="hero-image lg:w-1/2 h-full ">
               <img
-                src="https://wallpapercave.com/wp/wp3589308.jpg"
+                src="https://i.pinimg.com/originals/c7/b9/05/c7b905f7e8637a1709d06ad0c502b3ce.gif"
                 alt="Gaming background"
                 className="w-full h-full object-cover shadow-lg "
               />
             </div>
           </div>
         </section>
-        <section className="border-2 border-zinc-700">
+        <section className="border-2 border-zinc-700 ">
           <ImageSlider />
         </section>
         <section className="bg-zinc-800 py-8">
@@ -91,9 +92,9 @@ const Home = () => {
         <section className="section-hero w-full h-3/4 flex items-center justify-center">
           <div className="hero-two-section w-full h-full flex flex-col lg:flex-row items-center rounded-lg overflow-hidden">
             {/* Image Section */}
-            <div className="hero-image lg:w-1/2 h-full">
+            <div className="hero-image lg:w-1/2 h-full ml-8">
               <img
-                src="https://wallpapercave.com/wp/wp2444688.jpg"
+                src="https://giffiles.alphacoders.com/219/219281.gif"
                 alt="Gaming background"
                 className="w-full h-full object-cover  shadow-lg "
               />
@@ -127,6 +128,24 @@ const Home = () => {
               </div>
             </div>
           </div>
+          {/* // bar  */}
+        </section>
+        {/* bar */}
+        <section className="flex flex-col ml-11">
+          <RandomGameCards />
+        </section>
+        <section className="flex flex-col ml-11 mr-11">
+          <h1 className="text-3xl font-bold text-center text-white mb-6">
+            Expolore new offers✨
+          </h1>
+          <img
+            src="https://media.giphy.com/media/s3FBywPqyFuxO/giphy.gif"
+            alt="Gaming background"
+            className="w-full h-[40vh] md:h-[50vh] lg:h-[75vh] object-cover"
+          />
+        </section>
+        <section className="flex flex-col ml-11">
+          <RandomGameCards />
         </section>
       </main>
     </>

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../store/auth";
+import { toast } from "react-toastify";
+
 
 const Contact = () => {
   const [contact, setContact] = useState({
@@ -9,6 +11,7 @@ const Contact = () => {
   });
   const [notun, setnotun] = useState(true);
   const { person } = useAuth();
+  
   if (notun && person) {
     setContact({
       username: person.username,
@@ -38,7 +41,7 @@ const Contact = () => {
         body: JSON.stringify(contact),
       });
       if (response.ok) {
-        alert("Contact Form Submitted Successfully");
+        toast.success(" Submitted Successfully");
         setContact({
           username: "",
           email: "",
@@ -124,6 +127,7 @@ const Contact = () => {
                   <button
                     type="submit"
                     className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    
                   >
                     Submit
                   </button>

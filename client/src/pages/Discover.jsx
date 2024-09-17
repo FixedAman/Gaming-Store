@@ -1,5 +1,5 @@
-import React from 'react';
-import './Discover.css'; // Retain custom CSS if you have any specific styles
+import React from "react";
+import "./Discover.css"; // Retain custom CSS if you have any specific styles
 
 const Discover = () => {
   const section1Cards = [
@@ -41,7 +41,7 @@ const Discover = () => {
   return (
     <>
       {/* First Section */}
-      <div className="relative discover-containerp1 border-b border-zinc-800 gap-10">
+      <div className="relative discover-containerp1 border-b border-zinc-800 gap-10 ">
         <video
           autoPlay
           loop
@@ -54,28 +54,29 @@ const Discover = () => {
         <div className="relative z-10 flex flex-col items-center text-center py-20 text-white">
           <h1 className="text-4xl font-bold">EXPLORE THE HUB</h1>
           <h2 className="text-2xl mt-4">EVENTS</h2>
-          <div className="container  mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
+          <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
             {section1Cards.map((card, index) => (
               <div
                 key={index}
-                className="bg-white shadow-lg rounded-lg overflow-hidden max-w-xl mx-auto"
+                className="bg-white shadow-lg rounded-lg overflow-hidden max-w-xl mx-auto transition-transform transform hover:scale-105 hover:shadow-2xl duration-300"
               >
                 <img
                   src={card.image}
                   alt={card.title}
-                  className="w-full h-48 object-cover"
+                  className="w-full h-56 object-cover"
                 />
-                <div className="p-4">
-                  <h3 className="text-lg font-semibold">{card.title}</h3>
-                  <p className="mt-2 text-gray-700">{card.description}</p>
+                <div className="p-6 bg-gray-900 text-white">
+                  <h3 className="text-xl font-semibold">{card.title}</h3>
+                  <p className="mt-4 text-gray-400">{card.description}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
       </div>
+
       {/* Second Section */}
-      <div className="relative discover-containerp2 border-2 border-zinc-800 mt-10">
+      
         <video
           autoPlay
           loop
@@ -92,22 +93,22 @@ const Discover = () => {
             {section2Cards.map((card, index) => (
               <div
                 key={index}
-                className="bg-white shadow-lg rounded-lg overflow-hidden max-w-xs mx-auto"
+                className="bg-white shadow-lg rounded-lg overflow-hidden max-w-xs mx-auto transition-transform transform hover:scale-105 hover:shadow-2xl duration-300"
               >
                 <img
                   src={card.image}
                   alt={card.title}
-                  className="w-full h-48 object-cover"
+                  className="w-full h-56 object-cover"
                 />
-                <div className="p-4">
-                  <h3 className="text-lg font-semibold">{card.title}</h3>
-                  <p className="mt-2 text-gray-700">{card.description}</p>
+                <div className="p-6 bg-gray-900 text-white">
+                  <h3 className="text-xl font-semibold">{card.title}</h3>
+                  <p className="mt-4 text-gray-400">{card.description}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
-      </div>
+   
     </>
   );
 };

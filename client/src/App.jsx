@@ -16,6 +16,7 @@ import AdminUsers from "./pages/Admin-Users";
 import AdminLayout from "./components/layout/Admin-layout";
 import AdminContacts from "./pages/Admin-Contacts";
 import AdminUpdate from "./pages/Admin-Update";
+import { Footer } from "./components/Footer";
 
 const App = () => {
   return (
@@ -41,6 +42,7 @@ const App = () => {
             <Route path="contacts" element={<AdminContacts />} />
           </Route>
         </Routes>
+        <Footer />
       </BrowserRouter>
     </>
   );
